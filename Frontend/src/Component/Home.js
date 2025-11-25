@@ -969,56 +969,97 @@ const Home = () => {
       </Box>
 
       {/* Product Section */}
-      <Box sx={{ px: 3, py: 6, textAlign: 'center' }}>
-        <Typography variant="h4" fontWeight={900} color="primary" gutterBottom data-aos="fade-down">
-          Our Product
-        </Typography>
-        <Divider sx={{ mx: 'auto', width: 80, borderBottomWidth: 3, borderColor: 'primary.main', mb: 4 }} />
-        <Box sx={{ display: 'flex', alignItems: 'center', overflowX: 'auto', gap: 4, pb: 4 }}>
-          {(showAllProducts ? product : product.slice(0, 4)).map((prod, index) => (
-            <Box
-              key={index}
-              sx={{
-                flex: '0 0 auto',
-                width: 250,
-                borderRadius: 2,
-                boxShadow: 3,
-                backgroundColor: 'white',
-                p: 2,
-                textAlign: 'center',
-              }}
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
-            >
-              <img
-                src={prod.img}
-                alt={prod.alt}
-                loading="lazy"
-                style={{ width: '100%', height: 160, objectFit: 'cover' }}
-              />
-              <Typography variant="subtitle1" fontWeight={600} mt={1}>
-                {prod.alt}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {prod.desc}
-              </Typography>
-            </Box>
-          ))}
-          {!showAllProducts && (
-            <Box sx={{ flex: '0 0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 80 }}>
+    
+{/* 🟦 OUR PRODUCT SECTION */}
+<Box sx={{ px: 3, py: 6 }}>
+  <Typography
+    variant="h4"
+    fontWeight={900}
+    color="primary"
+    gutterBottom
+    textAlign="center"
+    data-aos="fade-down"
+  >
+    Our Product
+  </Typography>
+  <Divider
+    sx={{
+      mx: 'auto',
+      width: 80,
+      borderBottomWidth: 3,
+      borderColor: 'primary.main',
+      mb: 4,
+    }}
+  />
+
+  {/* ✅ Wrapper flexbox: grid on left, + button on right */}
+  <Box
+    sx={{
+      display: 'flex',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      gap: 3,
+    }}
+  >
+    {/* Product Grid */}
+    <Box className="product-grid" sx={{ flex: '1 1 auto', maxWidth: '1150px' }}>
+      {product.slice(0, 4).map((prod, index) => (
+        <Box
+          key={index}
+          className="product-card"
+          data-aos="fade-up"
+          data-aos-delay={index * 100}
+        >
+          <div className="product-thumb">
+            <img src={prod.img} alt={prod.alt} className="product-image" />
+            <div className="overlay">
               <Button
-                component={Link}
-                to="/OurProduct"
                 variant="contained"
-                color="primary"
-                sx={{ width: 50, height: 50, borderRadius: '50%' }}
+                color="secondary"
+                size="small"
+                className="view-button"
               >
-                +
+                🔗
               </Button>
-            </Box>
-          )}
+            </div>
+          </div>
+          <Typography variant="subtitle1" fontWeight={600} mt={1}>
+            {prod.alt}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {prod.desc}
+          </Typography>
         </Box>
-      </Box>
+      ))}
+    </Box>
+
+    {/* ✅ Floating “+” Button beside grid */}
+   <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+    <Button
+      component={Link}
+      to="/OurProduct"
+      variant="contained"
+      color="primary"
+      sx={{
+        width: 70,
+        height: 70,
+        borderRadius: '50%',
+        fontSize: '2rem',
+        boxShadow: '0 6px 12px rgba(0,0,0,0.2)',
+        '&:hover': {
+          transform: 'scale(1.1)',
+          boxShadow: '0 8px 16px rgba(0,0,0,0.3)',
+        },
+        transition: 'all 0.3s ease',
+      }}
+    >
+      +
+    </Button>
+  </Box>
+
+  </Box>
+</Box>
+
         {/* Post Processes Section */}
           <Box 
           sx={{
@@ -1063,7 +1104,7 @@ const Home = () => {
             {[
               'Heattreatment', 'Case hardening', 'Nitrating', 'Grinding', 'Gear hobbing', 'EDM/Wire Cutting',
               'Broaching', 'Powder Coating', 'Painting', 'Blackening', 'Phosphating',
-              'Various types of plating – chrome plating, zinc plating, etc.',
+              'Various types of plating chrome plating, zinc plating, etc.',
             ].map((process, idx) => (
               <Grid item xs={12} sm={6} md={4} key={idx}>
                 <Box
@@ -1095,48 +1136,7 @@ const Home = () => {
           </Grid>
         </Box>
 
-      {/* WhatsApp Floating Button */}
-      {/* <a
-        href="https://wa.me/9655821758?text=Hello!%20I'm%20interested%20in%20your%20services."
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          position: 'fixed',
-          bottom: 20,
-          right: 20,
-          zIndex: 1000,
-          backgroundColor: '#25D366',
-          color: 'white',
-          borderRadius: '50%',
-          width: 60,
-          height: 60,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-          textDecoration: 'none',
-        }}
-      >
-        <FaWhatsapp size={30} />  </a>
-          <Box sx={{ py: 6, backgroundColor: '#ffffff', textAlign: 'center' }}>
-           <Typography variant="h4" fontWeight={600} color="text.primary" gutterBottom data-aos="fade-down">
-             Our Customers
-           </Typography>
-           <Divider sx={{ mx: 'auto', width: 100, borderBottomWidth: 3, borderColor: 'primary.main', mb: 4 }} />
-           <Box
-             className="customer-frame"
-             sx={{ display: 'flex', justifyContent: 'center', gap: 4, flexWrap: 'wrap' }}
-           >
-             {customers.map((customer, index) => (
-               <img
-                 key={index}
-                 src={customer.image}
-                 alt={`Customer ${index}`}
-                 style={{ width: 100, height: 'auto', objectFit: 'contain' }}
-               />
-             ))}
-           </Box>
-         </Box>  */}
+     
          <a
   href="https://wa.me/9655821758?text=Hello!%20I'm%20interested%20in%20your%20services."
   target="_blank"

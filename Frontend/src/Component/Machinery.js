@@ -252,18 +252,18 @@ const Machinery = () => {
               sx={{ mb: 8 }}
             >
               <Grid item xs={12} md={6}>
-                <Paper
-                  elevation={3}
-                  sx={{
-                    borderRadius: 3,
-                    overflow: 'hidden',
-                    transition: 'transform 0.3s ease',
-                    '&:hover': {
-                      transform: 'scale(1.03)',
-                      boxShadow: '0 10px 20px rgba(0,0,0,0.15)',
-                    },
-                  }}
-                >
+               <Paper
+  elevation={3}
+  sx={{
+    borderRadius: 3,
+    overflow: 'hidden',
+    transition: 'transform 0.3s ease',
+    '&:hover': {
+      transform: 'scale(1.03)',
+      boxShadow: '0 10px 20px rgba(0,0,0,0.15)',
+    },
+  }}
+>
                   <Box
                     component="img"
                     src={machine.img}
