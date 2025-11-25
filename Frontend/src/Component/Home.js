@@ -1,5 +1,4 @@
-
-// import React, { useEffect, useState } from 'react';
+// import React, { useEffect } from 'react';
 // import {
 //   Box,
 //   Container,
@@ -7,7 +6,13 @@
 //   Button,
 //   Divider,
 //   Grid,
-//   Paper
+//   Paper,
+//   Card,
+//   CardContent,
+//   List,
+//   ListItem,
+//   ListItemIcon,
+//   ListItemText,
 // } from '@mui/material';
 // import { Link } from 'react-router-dom';
 // import AOS from 'aos';
@@ -15,30 +20,33 @@
 // import '../App.css';
 // import { Carousel } from 'react-responsive-carousel';
 // import 'react-responsive-carousel/lib/styles/carousel.min.css';
+// import { FaWhatsapp, FaPlus, FaAngleRight } from 'react-icons/fa';
 
+// // ✅ Product Data
 // const product = [
 //   {
 //     img: '/image/1.png',
-//     alt: 'Double-Groove Spacer or Pulley Spacer',
+//     alt: 'Double-Groove Spacer',
 //     desc: 'Used in pulley systems to maintain spacing and alignment.',
 //   },
 //   {
 //     img: '/image/2.png',
-//     alt: 'Single-Bore Precision Spacer',
-//     desc: 'Provides precise spacing for rotating machinery, typically used in mechanical assemblies.',
+//     alt: 'Precision Spacer',
+//     desc: 'Provides precise spacing for rotating machinery.',
 //   },
 //   {
 //     img: '/image/3.png',
-//     alt: 'Central Bore Bushing or Sleeve',
-//     desc: 'Ensures proper alignment and reduces friction in rotating shafts.',
+//     alt: 'Central Bore Bushing',
+//     desc: 'Ensures proper alignment and reduces friction in shafts.',
 //   },
 //   {
 //     img: '/image/4.png',
-//     alt: 'External Threaded Lock Nut / Slotted Retaining Ring',
-//     desc: 'Used in power transmission systems, offering dual groove functionality for improved load balance.',
+//     alt: 'Lock Nut / Retaining Ring',
+//     desc: 'Used in power transmission systems for load balance.',
 //   },
 // ];
 
+// // ✅ Carousel Slides
 // const slides = [
 //   {
 //     title: 'We Deliver Precision & Quality',
@@ -58,459 +66,49 @@
 //   { image: '/image/alpha.png' },
 // ];
 
+// // ✅ FIXED Vision & Mission Data (Now uses 'points' array for bullet logic)
 // const visionMissionData = [
 //   {
 //     title: 'Our Vision',
 //     img: '/image/image.png',
-//     details: (
-//       <Box component="ul" sx={{ pl: 2, mt: 1 }}>
-//         <div className="infra-description" data-aos="fade-up" data-aos-delay="300">
-//           <div className="infra-point" data-aos="zoom-in-up" data-aos-delay="400">
-//             To be the leading provider of precision machining solutions, driving innovation in manufacturing and exceeding customer expectations through unparalleled quality, reliability, and technological expertise.
-//           </div>
-//         </div>
-//       </Box>
-//     ),
+//     points: [
+//       "To be the leading provider of precision machining solutions.",
+//       "Driving innovation in manufacturing processes.",
+//       "Exceeding customer expectations through unparalleled quality.",
+//       "Ensuring reliability and demonstrating technological expertise."
+//     ],
 //   },
 //   {
 //     title: 'Our Mission',
 //     img: '/image/mission.png',
-//     details: (
-//       <Box component="ul" sx={{ pl: 2, mt: 1 }}>
-//         <div className="infra-description" data-aos="fade-up" data-aos-delay="300">
-//           <div className="infra-point" data-aos="zoom-in-up" data-aos-delay="400">
-//             <strong>Precision Excellence</strong>: Utilizing state-of-the-art technology and skilled craftsmanship.<br />
-//             <strong>Customer Satisfaction</strong>: Building long-term relationships by exceeding expectations.<br />
-//             <strong>Innovation</strong>: Embracing new technologies and continuous improvement.<br />
-//             <strong>Integrity</strong>: Operating with honesty and high ethical standards.<br />
-//             <strong>Environmental Responsibility</strong>: Minimizing environmental impact and promoting sustainability.<br />
-//             <strong>Employee Growth</strong>: Supporting the development and well-being of our team.
-//           </div>
-//         </div>
-//       </Box>
-//     ),
+//     points: [
+//       "Precision Excellence: Utilizing state-of-the-art technology and skilled craftsmanship.",
+//       "Customer Satisfaction: Building long-term relationships by exceeding expectations.",
+//       "Innovation: Embracing new technologies and continuous improvement.",
+//       "Integrity: Operating with honesty and high ethical standards.",
+//       "Environmental Responsibility: Minimizing environmental impact and promoting sustainability.",
+//       "Employee Growth: Supporting the development and well-being of our team."
+//     ],
 //   },
 // ];
 
 // const Home = () => {
-//   const [showAllProducts, setShowAllProducts] = useState(false);
-
 //   useEffect(() => {
-//     AOS.init({ duration: 600 });
-//   }, []);
-
-//   return (
-//     <div className="font-roboto text-black" style={{ overflowX: 'hidden' }}>
-//       {/* Hero Carousel with Gradient */}
-//       <Box
-//         sx={{
-//           position: 'relative',
-//           overflow: 'hidden',
-//           background: 'linear-gradient(135deg, #f8bbd0, #b2ebf2, #ffe082)',
-//           backgroundSize: '400% 400%',
-//           animation: 'gradientShift 20s ease infinite',
-//           py: 4,
-//           px: 3,
-//           '@keyframes gradientShift': {
-//             '0%': { backgroundPosition: '0% 50%' },
-//             '50%': { backgroundPosition: '100% 50%' },
-//             '100%': { backgroundPosition: '0% 50%' },
-//           },
-//         }}
-//       >
-//         <Carousel
-//           showArrows={false}
-//           showThumbs={false}
-//           infiniteLoop
-//           autoPlay
-//           interval={5000}
-//           transitionTime={1000}
-//           showStatus={false}
-//           stopOnHover={false}
-//           swipeable
-//         >
-//           {slides.map((slide, index) => (
-//             <Box
-//               key={index}
-//               sx={{
-//                 height: { xs: '250px', md: '350px' },
-//                 maxWidth: '800px',
-//                 mx: 'auto',
-//                 display: 'flex',
-//                 alignItems: 'center',
-//                 justifyContent: 'center',
-//                 textAlign: 'center',
-//                 px: 2,
-//               }}
-//             >
-//               <Container maxWidth="md">
-//                 <Typography
-//                   variant="h5"
-//                   fontWeight={600}
-//                   sx={{ mb: 2, color: '#2c3e50' }}
-//                 >
-//                   We{' '}
-//                   <span style={{ color: '#f06292' }}>
-//                     {slide.highlight}
-//                   </span>{' '}
-//                   {slide.title.split(' ').slice(2).join(' ')}
-//                 </Typography>
-//                 <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
-//                   <Button component={Link} to="/about" variant="contained" color="secondary">
-//                     Our Company
-//                   </Button>
-//                   <Button component={Link} to="/ContactUs" variant="outlined" color="secondary">
-//                     Contact Us
-//                   </Button>
-//                 </Box>
-//               </Container>
-//             </Box>
-//           ))}
-//         </Carousel>
-//       </Box>
-
-//       {/* All sections below carousel have white background */}
-//       <Box sx={{ backgroundColor: '#ffffff' }}>
-//         {/* Vision & Mission Section */}
-//         <Box sx={{ py: 10, px: { xs: 2, md: 8 }, background: '#ffffff' }}>
-//           {visionMissionData.map((item, idx) => {
-//             const isEven = idx % 2 === 1;
-//             return (
-//               <Grid
-//                 container
-//                 key={idx}
-//                 spacing={4}
-//                 direction={{ xs: 'column', md: isEven ? 'row-reverse' : 'row' }}
-//                 alignItems="center"
-//                 justifyContent="center"
-//                 data-aos={isEven ? 'fade-left' : 'fade-right'}
-//                 data-aos-delay={idx * 150}
-//                 sx={{ mb: 10 }}
-//               >
-//                 <Grid item xs={12} md={6}>
-//                   <Paper
-//                     elevation={3}
-//                     sx={{
-//                       borderRadius: 3,
-//                       overflow: 'hidden',
-//                       transition: 'transform 0.3s ease',
-//                       '&:hover': {
-//                         transform: 'scale(1.03)',
-//                         boxShadow: '0 10px 20px rgba(0,0,0,0.15)',
-//                       },
-//                     }}
-//                   >
-//                     <Box
-//                       component="img"
-//                       src={item.img}
-//                       alt={item.title}
-//                       sx={{
-//                         width: '100%',
-//                         height: { xs: 220, sm: 280, md: 300 },
-//                         objectFit: 'cover',
-//                       }}
-//                     />
-//                   </Paper>
-//                 </Grid>
-//                 <Grid item xs={12} md={6}>
-//                   <Typography variant="h5" fontWeight="600" color="#334e68" gutterBottom>
-//                     {item.title}
-//                   </Typography>
-//                   <Divider sx={{ mb: 2, borderColor: '#bcccdc', width: 60, borderWidth: 1.5, borderRadius: 1 }} />
-//                   <Typography variant="body1" color="#627d98" sx={{ fontSize: '1.1rem', lineHeight: 1.6 }}>
-//                     {item.details}
-//                   </Typography>
-//                 </Grid>
-//               </Grid>
-//             );
-//           })}
-//         </Box>
-
-//         {/* Our Product Section */}
-//         <Box sx={{ background: '#ffffff', px: 3, py: 6, textAlign: 'center' }}>
-//           <Typography variant="h4" fontWeight={900} color="primary" gutterBottom data-aos="fade-down">
-//             Our Product
-//           </Typography>
-//           <Divider
-//             sx={{
-//               mx: 'auto',
-//               width: 80,
-//               borderBottomWidth: 3,
-//               borderColor: 'primary.main',
-//               mb: 4,
-//             }}
-//           />
-//           <Box
-//             sx={{
-//               display: 'flex',
-//               alignItems: 'center',
-//               overflowX: 'auto',
-//               gap: 4,
-//               pb: 4,
-//               px: 2,
-//             }}
-//           >
-//             {(showAllProducts ? product : product.slice(0, 4)).map((prod, index) => (
-//               <Box
-//                 key={index}
-//                 sx={{
-//                   flex: '0 0 auto',
-//                   width: 250,
-//                   borderRadius: 2,
-//                   boxShadow: 3,
-//                   backgroundColor: 'white',
-//                   p: 2,
-//                   textAlign: 'center',
-//                 }}
-//                 data-aos="fade-up"
-//                 data-aos-delay={index * 100}
-//               >
-//                 <img
-//                   src={prod.img}
-//                   alt={prod.alt}
-//                   style={{
-//                     width: '100%',
-//                     height: 160,
-//                     objectFit: 'cover',
-//                     borderRadius: 8,
-//                   }}
-//                 />
-//                 <Typography variant="subtitle1" fontWeight={600} mt={1}>
-//                   {prod.alt}
-//                 </Typography>
-//                 <Typography variant="body2" color="text.secondary">
-//                   {prod.desc}
-//                 </Typography>
-//               </Box>
-//             ))}
-
-//             {!showAllProducts && (
-//               <Box
-//                 sx={{
-//                   flex: '0 0 auto',
-//                   display: 'flex',
-//                   alignItems: 'center',
-//                   justifyContent: 'center',
-//                   width: 80,
-//                   height: 160,
-//                 }}
-//               >
-//                 <Button
-//                   component={Link}
-//                   to="/OurProduct"
-//                   variant="contained"
-//                   color="primary"
-//                   sx={{
-//                     width: 50,
-//                     height: 50,
-//                     minWidth: 0,
-//                     fontSize: 24,
-//                     borderRadius: '50%',
-//                     p: 0,
-//                   }}
-//                 >
-//                   +
-//                 </Button>
-//               </Box>
-//             )}
-//           </Box>
-//         </Box>
-
-//         {/* Post Processes Section */}
-//         <Box
-//           sx={{
-//             py: 6,
-//             px: { xs: 2, md: 8 },
-//             background: '#ffffff',
-//           }}
-//         >
-//           <Typography
-//             variant="h4"
-//             fontWeight={700}
-//             color="text.primary"
-//             gutterBottom
-//             data-aos="fade-down"
-//           >
-//             Post Processes & Machining
-//           </Typography>
-//           <Divider
-//             sx={{
-//               mb: 3,
-//               width: 100,
-//               borderBottomWidth: 3,
-//               borderColor: 'secondary.main',
-//             }}
-//           />
-//           <Typography
-//             variant="body1"
-//             color="text.secondary"
-//             sx={{ mb: 4, fontSize: '1.1rem', maxWidth: 800, mx: 'auto' }}
-//             data-aos="fade-up"
-//             data-aos-delay="100"
-//           >
-//             We have well-defined out-sourcing processes with quality suppliers to deliver
-//             the materials required by our customers. Various post machining processes we deal with are:
-//           </Typography>
-
-//           <Grid container spacing={3} justifyContent="center">
-//             {[
-//               'Heattreatment', 'Case hardening', 'Nitrating', 'Grinding', 'Gear hobbing', 'EDM/Wire Cutting',
-//               'Broaching', 'Powder Coating', 'Painting', 'Blackening', 'Phosphating',
-//               'Various types of plating – chrome plating, zinc plating, etc.',
-//             ].map((process, idx) => (
-//               <Grid item xs={12} sm={6} md={4} key={idx}>
-//                 <Box
-//                   sx={{
-//                     p: 2,
-//                     borderRadius: 3,
-//                     backgroundColor: '#ffffff',
-//                     boxShadow: 3,
-//                     display: 'flex',
-//                     alignItems: 'center',
-//                     gap: 1.5,
-//                     transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-//                     '&:hover': {
-//                       transform: 'translateY(-6px)',
-//                       boxShadow: 6,
-//                       backgroundColor: '#f1f8e9',
-//                     },
-//                   }}
-//                   data-aos="zoom-in-up"
-//                   data-aos-delay={100 + idx * 70}
-//                 >
-//                   <span style={{ fontSize: '1.5rem', color: '#558b2f' }}>➤</span>
-//                   <Typography variant="body1" fontWeight={600}>
-//                     {process}
-//                   </Typography>
-//                 </Box>
-//               </Grid>
-//             ))}
-//           </Grid>
-//         </Box>
-
-//         {/* Customers Section */}
-//         <Box sx={{ py: 6, backgroundColor: '#ffffff', textAlign: 'center' }}>
-//           <Typography variant="h4" fontWeight={600} color="text.primary" gutterBottom data-aos="fade-down">
-//             Our Customers
-//           </Typography>
-//           <Divider sx={{ mx: 'auto', width: 100, borderBottomWidth: 3, borderColor: 'primary.main', mb: 4 }} />
-//           <Box
-//             className="customer-frame"
-//             sx={{ display: 'flex', justifyContent: 'center', gap: 4, flexWrap: 'wrap' }}
-//           >
-//             {customers.map((customer, index) => (
-//               <img
-//                 key={index}
-//                 src={customer.image}
-//                 alt={`Customer ${index}`}
-//                 style={{ width: 100, height: 'auto', objectFit: 'contain' }}
-//               />
-//             ))}
-//           </Box>
-//         </Box>
-//       </Box>
-//     </div>
-//   );
-// };
-
-// export default Home;
-
-// import React, { useEffect, useState } from 'react';
-// import {
-//   Box,
-//   Container,
-//   Typography,
-//   Button,
-//   Divider,
-//   Grid,
-//   Paper
-// } from '@mui/material';
-// import { Link } from 'react-router-dom';
-// import AOS from 'aos';
-// import 'aos/dist/aos.css';
-// import '../App.css';
-// import { Carousel } from 'react-responsive-carousel';
-// import 'react-responsive-carousel/lib/styles/carousel.min.css';
-// import { FaWhatsapp } from 'react-icons/fa';
-
-// const product = [
-//   {
-//     img: '/image/1.png',
-//     alt: 'Double-Groove Spacer or Pulley Spacer',
-//     desc: 'Used in pulley systems to maintain spacing and alignment.',
-//   },
-//   {
-//     img: '/image/2.png',
-//     alt: 'Single-Bore Precision Spacer',
-//     desc: 'Provides precise spacing for rotating machinery, typically used in mechanical assemblies.',
-//   },
-//   {
-//     img: '/image/3.png',
-//     alt: 'Central Bore Bushing or Sleeve',
-//     desc: 'Ensures proper alignment and reduces friction in rotating shafts.',
-//   },
-//   {
-//     img: '/image/4.png',
-//     alt: 'External Threaded Lock Nut / Slotted Retaining Ring',
-//     desc: 'Used in power transmission systems, offering dual groove functionality for improved load balance.',
-//   },
-// ];
-
-// const slides = [
-//   {
-//     title: 'We Deliver Precision & Quality',
-//     highlight: 'Deliver',
-//   },
-//   {
-//     title: 'We Provide The Best Industrial Solution',
-//     highlight: 'Provide',
-//   },
-// ];
-
-// const visionMissionData = [
-//   {
-//     title: 'Our Vision',
-//     img: '/image/image.png',
-//     details: (
-//       <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-//         To be the leading provider of precision machining solutions, driving innovation in manufacturing and exceeding customer expectations through unparalleled quality, reliability, and technological expertise.
-//       </Typography>
-//     ),
-//   },
-//   {
-//     title: 'Our Mission',
-//     img: '/image/mission.png',
-//     details: (
-//       <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-//         <strong>Precision Excellence:</strong> Utilizing state-of-the-art technology and skilled craftsmanship.<br />
-//         <strong>Customer Satisfaction:</strong> Building long-term relationships by exceeding expectations.<br />
-//         <strong>Innovation:</strong> Embracing new technologies and continuous improvement.<br />
-//         <strong>Integrity:</strong> Operating with honesty and high ethical standards.<br />
-//         <strong>Environmental Responsibility:</strong> Minimizing environmental impact and promoting sustainability.<br />
-//         <strong>Employee Growth:</strong> Supporting the development and well-being of our team.
-//       </Typography>
-//     ),
-//   },
-// ];
-
-// const Home = () => {
-//   const [showAllProducts, setShowAllProducts] = useState(false);
-
-//   useEffect(() => {
-//     AOS.init({ duration: 600 });
+//     AOS.init({ duration: 800, once: true });
 //   }, []);
 
 //   return (
 //     <div style={{ overflowX: 'hidden' }}>
-//       {/* Hero Section */}
+      
+//       {/* ================= HERO SECTION ================= */}
 //       <Box
 //         sx={{
 //           position: 'relative',
-//           background: 'linear-gradient(135deg, #f8bbd0, #b2ebf2, #ffe082)',
+//           background: 'linear-gradient(135deg, #e3f2fd, #fce4ec, #fff8e1)',
 //           backgroundSize: '400% 400%',
 //           animation: 'gradientShift 20s ease infinite',
-//           py: 4,
-//           px: 3,
+//           pt: 2,
+//           pb: 6,
 //           '@keyframes gradientShift': {
 //             '0%': { backgroundPosition: '0% 50%' },
 //             '50%': { backgroundPosition: '100% 50%' },
@@ -523,7 +121,7 @@
 //           showThumbs={false}
 //           infiniteLoop
 //           autoPlay
-//           interval={5000}
+//           interval={6000}
 //           transitionTime={1000}
 //           showStatus={false}
 //           stopOnHover={false}
@@ -533,22 +131,63 @@
 //             <Box
 //               key={index}
 //               sx={{
-//                 height: { xs: '250px', md: '350px' },
+//                 height: { xs: 350, md: 500 },
 //                 display: 'flex',
 //                 alignItems: 'center',
 //                 justifyContent: 'center',
+//                 backgroundColor: 'transparent', 
 //               }}
 //             >
-//               <Container maxWidth="md" sx={{ textAlign: 'center' }}>
-//                 <Typography variant="h5" fontWeight={600} sx={{ color: '#2c3e50', mb: 2 }}>
-//                   We <span style={{ color: '#f06292' }}>{slide.highlight}</span>{' '}
+//               <Container maxWidth="md" sx={{ textAlign: 'center', zIndex: 2 }}>
+//                 <Typography 
+//                   variant="h3" 
+//                   fontWeight={800} 
+//                   sx={{ 
+//                     mb: 3, 
+//                     color: '#1a237e',
+//                     fontSize: { xs: '2rem', md: '3rem' } 
+//                   }}
+//                 >
+//                   We <span style={{ color: '#d81b60' }}>{slide.highlight}</span>{' '}
 //                   {slide.title.split(' ').slice(2).join(' ')}
 //                 </Typography>
-//                 <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-//                   <Button component={Link} to="/about" variant="contained" color="secondary">
+                
+//                 <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, flexWrap: 'wrap', mt: 4 }}>
+//                   <Button
+//                     component={Link}
+//                     to="/about"
+//                     variant="contained"
+//                     color="secondary"
+//                     size="large"
+//                     sx={{
+//                       borderRadius: '50px',
+//                       px: 5,
+//                       py: 1.5,
+//                       fontSize: '1rem',
+//                       textTransform: 'none',
+//                       boxShadow: '0 8px 15px rgba(216, 27, 96, 0.3)',
+//                       transition: 'transform 0.3s',
+//                       '&:hover': { transform: 'translateY(-3px)' }
+//                     }}
+//                   >
 //                     Our Company
 //                   </Button>
-//                   <Button component={Link} to="/ContactUs" variant="outlined" color="secondary">
+//                   <Button
+//                     component={Link}
+//                     to="/ContactUs"
+//                     variant="outlined"
+//                     color="secondary"
+//                     size="large"
+//                     sx={{
+//                       borderRadius: '50px',
+//                       px: 5,
+//                       py: 1.5,
+//                       fontSize: '1rem',
+//                       textTransform: 'none',
+//                       borderWidth: 2,
+//                       '&:hover': { borderWidth: 2, backgroundColor: 'rgba(216, 27, 96, 0.05)' }
+//                     }}
+//                   >
 //                     Contact Us
 //                   </Button>
 //                 </Box>
@@ -558,121 +197,321 @@
 //         </Carousel>
 //       </Box>
 
-//       {/* Vision & Mission */}
-//       <Box sx={{ py: 10, px: { xs: 2, md: 8 } }}>
-//         {visionMissionData.map((item, idx) => {
-//           const isEven = idx % 2 === 1;
-//           return (
+//       {/* ================= VISION & MISSION ================= */}
+//       <Box sx={{ py: 10, px: { xs: 2, md: 8 }, backgroundColor: '#f9f9f9' }}>
+//         <Container maxWidth="lg">
+//             <Typography variant="h4" fontWeight={800} color="primary" textAlign="center" gutterBottom data-aos="fade-down">
+//               Our Vision & Mission
+//             </Typography>
+//             <Divider sx={{ mx: 'auto', width: 80, borderBottomWidth: 4, borderColor: 'secondary.main', mb: 8, borderRadius: 2 }} />
+
+//             {visionMissionData.map((item, idx) => (
 //             <Grid
-//               container
-//               spacing={4}
-//               direction={{ xs: 'column', md: isEven ? 'row-reverse' : 'row' }}
-//               alignItems="center"
-//               justifyContent="center"
-//               data-aos={isEven ? 'fade-left' : 'fade-right'}
-//               data-aos-delay={idx * 150}
-//               sx={{ mb: 10 }}
-//               key={idx}
+//                 container
+//                 spacing={6}
+//                 alignItems="stretch" 
+//                 justifyContent="center"
+//                 key={idx}
+//                 // idx 0 (Vision) = row (Image Left), idx 1 (Mission) = row-reverse (Image Right)
+//                 direction={idx % 2 === 0 ? 'row' : 'row-reverse'} 
+//                 sx={{ mb: 8 }}
+//                 data-aos="fade-up"
 //             >
-//               <Grid item xs={12} md={6}>
-//                 <Paper elevation={3} sx={{ borderRadius: 3 }}>
-//                   <Box
-//                     component="img"
-//                     src={item.img}
-//                     alt={item.title}
-//                     sx={{ width: '100%', height: 300, objectFit: 'cover', borderRadius: 3 }}
-//                   />
-//                 </Paper>
-//               </Grid>
-//               <Grid item xs={12} md={6}>
-//                 <Typography variant="h5" fontWeight={600} gutterBottom>
-//                   {item.title}
-//                 </Typography>
-//                 <Divider sx={{ mb: 2, width: 60 }} />
-//                 {item.details}
-//               </Grid>
+//                 {/* IMAGE BOX */}
+//                 <Grid item xs={12} md={6}>
+//                   <Paper
+//                       elevation={5}
+//                       sx={{
+//                       borderRadius: 4,
+//                       overflow: 'hidden',
+//                       height: '100%',
+//                       minHeight: 350,
+//                       transition: 'transform 0.4s ease, box-shadow 0.4s ease',
+//                       '&:hover': { 
+//                           transform: 'scale(1.02)',
+//                           boxShadow: '0 15px 30px rgba(0,0,0,0.2)' 
+//                       },
+//                       }}
+//                   >
+//                       <img 
+//                         src={item.img} 
+//                         alt={item.title} 
+//                         style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+//                       />
+//                   </Paper>
+//                 </Grid>
+
+//                 {/* CONTENT BOX (With Bullet Points) */}
+//                 <Grid item xs={12} md={6}>
+//                   <Paper
+//                     elevation={3}
+//                     sx={{
+//                         p: { xs: 3, md: 5 },
+//                         height: '100%',
+//                         borderRadius: 4,
+//                         display: 'flex',
+//                         flexDirection: 'column',
+//                         justifyContent: 'center',
+//                         backgroundColor: '#ffffff',
+//                         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+//                         borderLeft: `6px solid #1976d2`, // Nice accent border
+//                         '&:hover': {
+//                             transform: 'translateY(-5px)',
+//                             boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+//                         },
+//                     }}
+//                   >
+//                       <Typography variant="h4" fontWeight={700} color="#2c3e50" gutterBottom>
+//                         {item.title}
+//                       </Typography>
+//                       <Divider sx={{ width: 60, height: 3, backgroundColor: '#1976d2', mb: 3, borderRadius: 1 }} />
+                      
+//                       {/* Bullet Point List */}
+//                       <List>
+//                         {item.points.map((point, i) => {
+//                             // Splitting for Bold text logic (e.g., "Title: Description")
+//                             const parts = point.split(':');
+//                             const hasBoldTitle = parts.length > 1;
+
+//                             return (
+//                                 <ListItem key={i} alignItems="flex-start" sx={{ px: 0, py: 0.5 }}>
+//                                     <ListItemIcon sx={{ minWidth: 35, mt: 0.5 }}>
+//                                         <FaAngleRight color="#d81b60" size={20} />
+//                                     </ListItemIcon>
+//                                     <ListItemText
+//                                         primary={
+//                                             <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6, fontSize: '1.05rem' }}>
+//                                                 {hasBoldTitle ? (
+//                                                     <>
+//                                                         <strong style={{ color: '#333' }}>{parts[0]}:</strong>
+//                                                         {parts.slice(1).join(':')}
+//                                                     </>
+//                                                 ) : (
+//                                                     point
+//                                                 )}
+//                                             </Typography>
+//                                         }
+//                                     />
+//                                 </ListItem>
+//                             );
+//                         })}
+//                       </List>
+//                   </Paper>
+//                 </Grid>
 //             </Grid>
-//           );
-//         })}
+//             ))}
+//         </Container>
 //       </Box>
 
-//       {/* Product Section */}
-//       <Box sx={{ px: 3, py: 6, textAlign: 'center' }}>
-//         <Typography variant="h4" fontWeight={900} color="primary" gutterBottom data-aos="fade-down">
-//           Our Product
-//         </Typography>
-//         <Divider sx={{ mx: 'auto', width: 80, borderBottomWidth: 3, borderColor: 'primary.main', mb: 4 }} />
-//         <Box sx={{ display: 'flex', alignItems: 'center', overflowX: 'auto', gap: 4, pb: 4 }}>
-//           {(showAllProducts ? product : product.slice(0, 4)).map((prod, index) => (
-//             <Box
-//               key={index}
-//               sx={{
-//                 flex: '0 0 auto',
-//                 width: 250,
-//                 borderRadius: 2,
-//                 boxShadow: 3,
-//                 backgroundColor: 'white',
-//                 p: 2,
-//                 textAlign: 'center',
-//               }}
-//               data-aos="fade-up"
-//               data-aos-delay={index * 100}
-//             >
-//               <img src={prod.img} alt={prod.alt} style={{ width: '100%', height: 160, objectFit: 'cover' }} />
-//               <Typography variant="subtitle1" fontWeight={600} mt={1}>
-//                 {prod.alt}
-//               </Typography>
-//               <Typography variant="body2" color="text.secondary">
-//                 {prod.desc}
-//               </Typography>
-//             </Box>
-//           ))}
-//           {!showAllProducts && (
-//             <Box sx={{ flex: '0 0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 80 }}>
-//               <Button
+//       {/* ================= PRODUCTS SECTION ================= */}
+//       <Box sx={{ py: 10, backgroundColor: '#ffffff' }}>
+//         <Container maxWidth="xl">
+//           <Typography variant="h4" fontWeight={900} color="primary" textAlign="center" gutterBottom data-aos="fade-down">
+//             Our Products
+//           </Typography>
+//           <Divider sx={{ mx: 'auto', width: 80, borderBottomWidth: 4, borderColor: 'secondary.main', mb: 6, borderRadius: 2 }} />
+
+//           <Grid container spacing={4} justifyContent="center" alignItems="stretch">
+//             {/* Render First 4 Products */}
+//             {product.slice(0, 4).map((prod, index) => (
+//               <Grid item xs={12} sm={6} md={4} lg={2.4} key={index} data-aos="fade-up" data-aos-delay={index * 100}>
+//                 <Card
+//                   sx={{
+//                     height: '100%',
+//                     display: 'flex',
+//                     flexDirection: 'column',
+//                     borderRadius: 3,
+//                     boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+//                     transition: '0.3s',
+//                     '&:hover': {
+//                       transform: 'translateY(-8px)',
+//                       boxShadow: '0 12px 24px rgba(0,0,0,0.15)',
+//                     },
+//                   }}
+//                 >
+//                   <Box sx={{ overflow: 'hidden', height: 180 }}>
+//                     <Box
+//                       component="img"
+//                       src={prod.img}
+//                       alt={prod.alt}
+//                       sx={{
+//                         width: '100%',
+//                         height: '100%',
+//                         objectFit: 'cover',
+//                         transition: 'transform 0.5s ease',
+//                         '&:hover': { transform: 'scale(1.1)' },
+//                       }}
+//                     />
+//                   </Box>
+//                   <CardContent sx={{ flexGrow: 1, textAlign: 'center' }}>
+//                     <Typography variant="subtitle1" fontWeight={700} gutterBottom sx={{ color: '#37474f' }}>
+//                       {prod.alt}
+//                     </Typography>
+//                     <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.875rem' }}>
+//                       {prod.desc}
+//                     </Typography>
+//                   </CardContent>
+//                 </Card>
+//               </Grid>
+//             ))}
+
+//             {/* View All Button Card */}
+//             <Grid item xs={12} sm={6} md={4} lg={2.4} data-aos="fade-up" data-aos-delay={500}>
+//               <Card
 //                 component={Link}
 //                 to="/OurProduct"
-//                 variant="contained"
-//                 color="primary"
-//                 sx={{ width: 50, height: 50, borderRadius: '50%' }}
+//                 sx={{
+//                   height: '100%',
+//                   display: 'flex',
+//                   alignItems: 'center',
+//                   justifyContent: 'center',
+//                   borderRadius: 3,
+//                   backgroundColor: 'primary.main',
+//                   color: 'white',
+//                   textDecoration: 'none',
+//                   cursor: 'pointer',
+//                   transition: '0.3s',
+//                   boxShadow: 3,
+//                   '&:hover': {
+//                     backgroundColor: 'primary.dark',
+//                     transform: 'translateY(-8px)',
+//                     boxShadow: 6,
+//                   },
+//                 }}
 //               >
-//                 +
-//               </Button>
-//             </Box>
-//           )}
-//         </Box>
+//                 <Box textAlign="center">
+//                   <Box 
+//                     sx={{ 
+//                         width: 60, height: 60, borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.2)', 
+//                         display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 2 
+//                     }}
+//                   >
+//                     <FaPlus size={24} color="white" />
+//                   </Box>
+//                   <Typography variant="h6" fontWeight={700}>View All Products</Typography>
+//                 </Box>
+//               </Card>
+//             </Grid>
+//           </Grid>
+//         </Container>
 //       </Box>
 
-//       {/* WhatsApp Floating Button */}
-//       <a
-//         href="https://wa.me/8678966930?text=Hello!%20I'm%20interested%20in%20your%20services."
+//       {/* ================= POST PROCESSES ================= */}
+//       <Box sx={{ py: 10, px: { xs: 2, md: 8 }, background: '#f4f6f8' }}>
+//         <Container maxWidth="lg">
+//             <Typography variant="h4" fontWeight={700} color="text.primary" textAlign="center" gutterBottom data-aos="fade-down">
+//             Post Processes & Machining
+//             </Typography>
+//             <Divider sx={{ mb: 6, mx: 'auto', width: 100, height: 4, backgroundColor: 'secondary.main', borderRadius: 2 }} />
+            
+//             <Grid container spacing={3} justifyContent="center">
+//             {[
+//                 'Heat Treatment', 'Case Hardening', 'Nitriding', 'Grinding', 'Gear Hobbing', 'EDM/Wire Cutting',
+//                 'Broaching', 'Powder Coating', 'Painting', 'Blackening', 'Phosphating',
+//                 'Chrome & Zinc Plating',
+//             ].map((process, idx) => (
+//                 <Grid item xs={12} sm={6} md={3} key={idx}>
+//                 <Paper
+//                     elevation={0}
+//                     sx={{
+//                     p: 2.5,
+//                     borderRadius: 2,
+//                     border: '1px solid #e0e0e0',
+//                     textAlign: 'center',
+//                     height: '100%',
+//                     display: 'flex',
+//                     alignItems: 'center',
+//                     justifyContent: 'center',
+//                     flexDirection: 'column',
+//                     transition: 'all 0.3s ease',
+//                     '&:hover': {
+//                         transform: 'translateY(-5px)',
+//                         boxShadow: '0 10px 20px rgba(0,0,0,0.1)',
+//                         borderColor: 'primary.main',
+//                         backgroundColor: '#fff',
+//                     },
+//                     }}
+//                     data-aos="zoom-in"
+//                     data-aos-delay={idx * 50}
+//                 >
+//                     <Typography variant="body1" fontWeight={600} color="text.secondary" sx={{ '&:hover': { color: 'primary.main' } }}>
+//                     {process}
+//                     </Typography>
+//                 </Paper>
+//                 </Grid>
+//             ))}
+//             </Grid>
+//         </Container>
+//       </Box>
+
+//       {/* ================= CUSTOMERS SECTION ================= */}
+//       <Box sx={{ py: 8, backgroundColor: '#ffffff' }}>
+//         <Container>
+//             <Typography variant="h4" fontWeight={700} color="text.primary" textAlign="center" gutterBottom data-aos="fade-down">
+//                 Our Customers
+//             </Typography>
+//             <Divider sx={{ mb: 6, mx: 'auto', width: 80, height: 4, backgroundColor: 'secondary.main', borderRadius: 2 }} />
+            
+//             <Grid container spacing={6} justifyContent="center" alignItems="center">
+//                 {customers.map((c, i) => (
+//                 <Grid item key={i} data-aos="fade-up" data-aos-delay={i * 100}>
+//                     <Box
+//                     component="img"
+//                     src={c.image}
+//                     alt={`Customer ${i}`}
+//                     sx={{
+//                         width: 140,
+//                         height: 70,
+//                         objectFit: 'contain',
+//                         filter: 'grayscale(100%) opacity(0.7)', // Start gray
+//                         transition: 'all 0.4s ease',
+//                         cursor: 'pointer',
+//                         '&:hover': { 
+//                             filter: 'grayscale(0%) opacity(1)', // Color on hover
+//                             transform: 'scale(1.1)' 
+//                         },
+//                     }}
+//                     />
+//                 </Grid>
+//                 ))}
+//             </Grid>
+//         </Container>
+//       </Box>
+
+//       {/* ================= WHATSAPP BUTTON ================= */}
+//       <Box
+//         component="a"
+//         href="https://wa.me/9655821758?text=Hello!%20I'm%20interested%20in%20your%20services."
 //         target="_blank"
 //         rel="noopener noreferrer"
-//         style={{
+//         sx={{
 //           position: 'fixed',
-//           bottom: 20,
-//           right: 20,
+//           bottom: 30,
+//           right: 30,
 //           zIndex: 1000,
 //           backgroundColor: '#25D366',
 //           color: 'white',
 //           borderRadius: '50%',
-//           width: 60,
-//           height: 60,
+//           width: 65,
+//           height: 65,
 //           display: 'flex',
 //           alignItems: 'center',
 //           justifyContent: 'center',
-//           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+//           boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
 //           textDecoration: 'none',
+//           transition: 'transform 0.3s',
+//           '&:hover': { transform: 'scale(1.15)', boxShadow: '0 6px 16px rgba(0,0,0,0.4)' },
 //         }}
 //       >
-//         <FaWhatsapp size={30} />
-//       </a>
+//         <FaWhatsapp size={35} />
+//       </Box>
+
 //     </div>
 //   );
 // };
 
 // export default Home;
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Container,
@@ -681,6 +520,12 @@ import {
   Divider,
   Grid,
   Paper,
+  Card,
+  CardContent,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AOS from 'aos';
@@ -688,33 +533,33 @@ import 'aos/dist/aos.css';
 import '../App.css';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp, FaArrowRight, FaAngleRight } from 'react-icons/fa';
 
-// Product Data
+// ✅ Product Data
 const product = [
   {
     img: '/image/1.png',
-    alt: 'Double-Groove Spacer or Pulley Spacer',
-    desc: 'Used in pulley systems to maintain spacing and alignment.',
+    alt: 'Double-Groove Spacer',
+    desc: 'Precision spacers for pulley alignment.',
   },
   {
     img: '/image/2.png',
-    alt: 'Single-Bore Precision Spacer',
-    desc: 'Provides precise spacing for rotating machinery, typically used in mechanical assemblies.',
+    alt: 'Precision Spacer',
+    desc: 'High-quality spacing for rotating machinery.',
   },
   {
     img: '/image/3.png',
-    alt: 'Central Bore Bushing or Sleeve',
-    desc: 'Ensures proper alignment and reduces friction in rotating shafts.',
+    alt: 'Central Bore Bushing',
+    desc: 'Durable bushings for friction reduction.',
   },
   {
     img: '/image/4.png',
-    alt: 'External Threaded Lock Nut / Slotted Retaining Ring',
-    desc: 'Used in power transmission systems, offering dual groove functionality for improved load balance.',
+    alt: 'Lock Nut / Retaining Ring',
+    desc: 'Secure locking for power transmission.',
   },
 ];
 
-// Hero Slides
+// ✅ Carousel Slides
 const slides = [
   {
     title: 'We Deliver Precision & Quality',
@@ -725,69 +570,60 @@ const slides = [
     highlight: 'Provide',
   },
 ];
- const customers = [
-   { image: '/image/caompaeroIndia.png' },
-   { image: '/image/janatics.jpg' },
-   { image: '/image/mak.png' },
-   { image: '/image/bezares.png' },
-   { image: '/image/alpha.png' },
- ];
 
-// Vision and Mission Content
+const customers = [
+  { image: '/image/caompaeroIndia.png' },
+  { image: '/image/janatics.jpg' },
+  { image: '/image/mak.png' },
+  { image: '/image/bezares.png' },
+  { image: '/image/alpha.png' },
+];
+
+// ✅ Vision & Mission Data
 const visionMissionData = [
   {
-       title: 'Our Vision',
+    title: 'Our Vision',
     img: '/image/image.png',
-    details: (
-      <Box component="ul" sx={{ pl: 2, mt: 1 }}>
-        <div className="infra-description" data-aos="fade-up" data-aos-delay="300">
-          <div className="infra-point" data-aos="zoom-in-up" data-aos-delay="400">
-            To be the leading provider of precision machining solutions, driving innovation in manufacturing and exceeding customer expectations through unparalleled quality, reliability, and technological expertise.
-          </div>
-        </div>
-      </Box>
-
-    ),
+    points: [
+      "To be the leading provider of precision machining solutions.",
+      "Driving innovation in manufacturing processes.",
+      "Exceeding customer expectations through unparalleled quality.",
+      "Ensuring reliability and demonstrating technological expertise."
+    ],
   },
   {
     title: 'Our Mission',
     img: '/image/mission.png',
-    details: (
-      <Box component="ul" sx={{ pl: 2, mt: 1 }}>
-        <div className="infra-description" data-aos="fade-up" data-aos-delay="300">
-          <div className="infra-point" data-aos="zoom-in-up" data-aos-delay="400">
-            <strong>Precision Excellence</strong>: Utilizing state-of-the-art technology and skilled craftsmanship.<br />
-            <strong>Customer Satisfaction</strong>: Building long-term relationships by exceeding expectations.<br />
-            <strong>Innovation</strong>: Embracing new technologies and continuous improvement.<br />
-            <strong>Integrity</strong>: Operating with honesty and high ethical standards.<br />
-            <strong>Environmental Responsibility</strong>: Minimizing environmental impact and promoting sustainability.<br />
-            <strong>Employee Growth</strong>: Supporting the development and well-being of our team.
-          </div>
-        </div>
-      </Box>
-      
-    ),
+    points: [
+      "Precision Excellence: Utilizing state-of-the-art technology.",
+      "Customer Satisfaction: Building long-term relationships.",
+      "Innovation: Embracing new technologies.",
+      "Integrity: Operating with honesty and ethics.",
+      "Sustainability: Minimizing environmental impact.",
+      "Employee Growth: Supporting team development."
+    ],
   },
 ];
 
 const Home = () => {
-  const [showAllProducts, setShowAllProducts] = useState(false);
-
   useEffect(() => {
-    AOS.init({ duration: 600 });
+    AOS.init({ duration: 1000, once: true }); // Increased duration for smoother animation
   }, []);
 
   return (
-    <div style={{ overflowX: 'hidden' }}>
-      {/* Hero Section */}
-      {/* <Box
+    // ✅ FIX: Overflow Hidden on root div prevents horizontal scrollbar
+    <div style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
+      
+      {/* ================= HERO SECTION (Reduced Size) ================= */}
+      <Box
         sx={{
           position: 'relative',
-          background: 'linear-gradient(135deg, #f8bbd0, #b2ebf2, #ffe082)',
+          width: '100%',
+          background: 'linear-gradient(135deg, #e3f2fd, #fce4ec, #fff8e1)',
           backgroundSize: '400% 400%',
           animation: 'gradientShift 20s ease infinite',
-          py: 4,
-          px: 3,
+          pt: 2, // Reduced padding top
+          pb: 4, // Reduced padding bottom
           '@keyframes gradientShift': {
             '0%': { backgroundPosition: '0% 50%' },
             '50%': { backgroundPosition: '100% 50%' },
@@ -795,392 +631,365 @@ const Home = () => {
           },
         }}
       >
-        <Carousel
-          showArrows={false}
-          showThumbs={false}
-          infiniteLoop
-          autoPlay
-          interval={5000}
-          transitionTime={1000}
-          showStatus={false}
-          stopOnHover={false}
-          swipeable
-        >
-          {slides.map((slide, index) => (
-            <Box
-              key={index}
-              sx={{
-                height: { xs: '250px', md: '350px' },
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Container maxWidth="md" sx={{ textAlign: 'center' }}>
-                <Typography variant="h5" fontWeight={600} sx={{ color: '#2c3e50', mb: 2 }}>
-                  We <span style={{ color: '#f06292' }}>{slide.highlight}</span>{' '}
-                  {slide.title.split(' ').slice(2).join(' ')}
-                </Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-                  <Button component={Link} to="/about" variant="contained" color="secondary">
-                    Our Company
-                  </Button>
-                  <Button component={Link} to="/ContactUs" variant="outlined" color="secondary">
-                    Contact Us
-                  </Button>
+        <Container maxWidth="lg">
+          <Carousel
+            showArrows={false}
+            showThumbs={false}
+            showStatus={false}
+            infiniteLoop
+            autoPlay
+            interval={5000}
+            stopOnHover={false}
+            swipeable
+            emulateTouch
+          >
+            {slides.map((slide, index) => (
+              <Box
+                key={index}
+                sx={{
+                  // ✅ FIX: Reduced Height (400px desktop / 280px mobile)
+                  height: { xs: 280, md: 400 }, 
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Box sx={{ textAlign: 'center', zIndex: 2, px: 2 }}>
+                  <Typography 
+                    variant="h2" 
+                    fontWeight={900} 
+                    sx={{ 
+                      mb: 3, 
+                      color: '#1a237e',
+                      fontSize: { xs: '2rem', md: '3.5rem' }, 
+                      textShadow: '0px 4px 12px rgba(0,0,0,0.1)'
+                    }}
+                  >
+                    We <span style={{ color: '#d81b60' }}>{slide.highlight}</span>{' '}
+                    {slide.title.split(' ').slice(2).join(' ')}
+                  </Typography>
+                  
+                  <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, mt: 4 }}>
+                    <Button
+                      component={Link}
+                      to="/about"
+                      variant="contained"
+                      color="secondary"
+                      size="large"
+                      sx={{ borderRadius: '50px', px: 5, py: 1.5, fontSize: '1.1rem', fontWeight: 'bold' }}
+                    >
+                      Our Company
+                    </Button>
+                    <Button
+                      component={Link}
+                      to="/ContactUs"
+                      variant="outlined"
+                      color="secondary"
+                      size="large"
+                      sx={{ borderRadius: '50px', px: 5, py: 1.5, fontSize: '1.1rem', borderWidth: 2, fontWeight: 'bold' }}
+                    >
+                      Contact Us
+                    </Button>
+                  </Box>
                 </Box>
-              </Container>
-            </Box>
-          ))}
-        </Carousel>
-      </Box> */}
-<Box
-  sx={{
-    position: 'relative',
-    py: 4,
-    '@keyframes gradientShift': {
-      '0%': { backgroundPosition: '0% 50%' },
-      '50%': { backgroundPosition: '100% 50%' },
-      '100%': { backgroundPosition: '0% 50%' },
-    },
-    background: 'linear-gradient(135deg, #b2ebf2, #fce4ec, #ffe082)',
-    backgroundSize: '400% 400%',
-    animation: 'gradientShift 20s ease infinite',
-  }}
->
-  <Carousel
-    showArrows={false}
-    showThumbs={false}
-    infiniteLoop
-    autoPlay
-    interval={6000}
-    transitionTime={1000}
-    showStatus={false}
-    stopOnHover={false}
-    swipeable
-  >
-    {slides.map((slide, index) => (
+              </Box>
+            ))}
+          </Carousel>
+        </Container>
+      </Box>
+
+      {/* ================= VISION & MISSION (Animated) ================= */}
+      <Box sx={{ py: 10, px: { xs: 2, md: 8 }, backgroundColor: '#f9f9f9' }}>
+        <Container maxWidth="xl">
+            <Typography variant="h3" fontWeight={800} color="primary" textAlign="center" gutterBottom data-aos="fade-down">
+              Our Vision & Mission
+            </Typography>
+            <Divider sx={{ mx: 'auto', width: 120, borderBottomWidth: 5, borderColor: 'secondary.main', mb: 8, borderRadius: 2 }} />
+
+            {visionMissionData.map((item, idx) => (
+            <Grid
+                container
+                spacing={6}
+                alignItems="center"
+                justifyContent="center"
+                key={idx}
+                direction={idx % 2 === 0 ? 'row' : 'row-reverse'} 
+                sx={{ mb: 8 }}
+            >
+                {/* IMAGE BOX - Added Animation */}
+                <Grid 
+                  item xs={12} md={5} 
+                  data-aos={idx % 2 === 0 ? "fade-right" : "fade-left"} // ✅ Animation based on side
+                >
+                  <Paper
+                      elevation={6}
+                      sx={{
+                      borderRadius: 4,
+                      overflow: 'hidden',
+                      height: 320, 
+                      width: '100%',
+                      transition: 'transform 0.3s',
+                      '&:hover': { transform: 'scale(1.02)' },
+                      }}
+                  >
+                      <img 
+                        src={item.img} 
+                        alt={item.title} 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                      />
+                  </Paper>
+                </Grid>
+
+                {/* CONTENT BOX - Added Animation */}
+                <Grid 
+                  item xs={12} md={7}
+                  data-aos={idx % 2 === 0 ? "fade-left" : "fade-right"} // ✅ Animation based on side
+                >
+                  <Paper
+                    elevation={2}
+                    sx={{
+                        p: 4, 
+                        borderRadius: 4,
+                        backgroundColor: '#ffffff',
+                        borderLeft: `6px solid #1976d2`,
+                    }}
+                  >
+                      <Typography variant="h4" fontWeight={800} color="#2c3e50" gutterBottom>
+                        {item.title}
+                      </Typography>
+                      
+                      <List disablePadding sx={{ mt: 2 }}>
+                        {item.points.map((point, i) => (
+                            <ListItem key={i} alignItems="flex-start" sx={{ px: 0, py: 0.5 }}>
+                                <ListItemIcon sx={{ minWidth: 35, mt: 0.5 }}>
+                                    <FaAngleRight color="#d81b60" size={20} />
+                                </ListItemIcon>
+                                <ListItemText
+                                    primary={
+                                        <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem', fontWeight: 500 }}>
+                                            {point}
+                                        </Typography>
+                                    }
+                                />
+                            </ListItem>
+                        ))}
+                      </List>
+                  </Paper>
+                </Grid>
+            </Grid>
+            ))}
+        </Container>
+      </Box>
+
+      {/* ================= PRODUCTS SECTION ================= */}
+      <Box sx={{ py: 10, backgroundColor: '#ffffff' }}>
+        <Container maxWidth="xl"> 
+          <Typography variant="h3" fontWeight={900} color="primary" textAlign="center" gutterBottom data-aos="fade-down">
+            Our Products
+          </Typography>
+          <Divider sx={{ mx: 'auto', width: 120, borderBottomWidth: 5, borderColor: 'secondary.main', mb: 8, borderRadius: 2 }} />
+
+          {/* Grid Container */}
+          <Grid container spacing={4} justifyContent="center" alignItems="stretch">
+            
+            {/* 1. Loop through 4 Products */}
+            {product.slice(0, 4).map((prod, index) => (
+              <Grid item xs={12} sm={6} md={2.4} key={index} data-aos="fade-up" data-aos-delay={index * 100}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    borderRadius: 4,
+                    boxShadow: 3,
+                    border: '1px solid #eee',
+                    transition: '0.3s',
+                    minHeight: 340,
+                    '&:hover': {
+                      transform: 'translateY(-10px)',
+                      boxShadow: 12,
+                      borderColor: 'primary.main'
+                    },
+                  }}
+                >
+                  <Box sx={{ p: 3, height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img
+                      src={prod.img}
+                      alt={prod.alt}
+                      style={{
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        objectFit: 'contain',
+                        transition: 'transform 0.3s'
+                      }}
+                    />
+                  </Box>
+                  <CardContent sx={{ flexGrow: 1, textAlign: 'center', bgcolor: '#fafafa', p: 3 }}>
+                    <Typography variant="h6" fontWeight={800} sx={{ color: '#2c3e50', fontSize: '1.1rem', lineHeight: 1.3, mb: 1 }}>
+                      {prod.alt}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.95rem' }}>
+                      {prod.desc}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+
+            {/* 2. Plus Button (View All) - ✅ THIS IS THE ARROW BUTTON */}
+            <Grid item xs={12} sm={6} md={2.4} data-aos="fade-left" data-aos-delay={500}>
+              <Card
+                component={Link}
+                to="/OurProduct"
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexDirection: 'column',
+                  borderRadius: 4,
+                  background: 'linear-gradient(135deg, #1976d2 0%, #0d47a1 100%)',
+                  color: 'white',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  boxShadow: 4,
+                  minHeight: 340,
+                  transition: '0.3s',
+                  '&:hover': {
+                    transform: 'translateY(-10px)',
+                    boxShadow: 15,
+                    background: 'linear-gradient(135deg, #d81b60 0%, #ad1457 100%)',
+                  },
+                }}
+              >
+                <Box 
+                    sx={{ 
+                        width: 90, height: 90, borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.2)', 
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 3 
+                    }}
+                >
+                    {/* ✅ Arrow Icon */}
+                    <FaArrowRight size={40} color="white" />
+                </Box>
+                <Typography variant="h5" fontWeight={800}>View All</Typography>
+              </Card>
+            </Grid>
+
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* ================= POST PROCESSES ================= */}
+      <Box sx={{ py: 10, px: { xs: 2, md: 8 }, background: '#f4f6f8' }}>
+        <Container maxWidth="xl">
+            <Typography variant="h3" fontWeight={800} color="text.primary" textAlign="center" gutterBottom data-aos="fade-down">
+            Post Processes & Machining
+            </Typography>
+            <Divider sx={{ mb: 8, mx: 'auto', width: 120, height: 5, backgroundColor: 'secondary.main', borderRadius: 2 }} />
+            
+            <Grid container spacing={4} justifyContent="center" alignItems="stretch">
+            {[
+                'Heat Treatment', 'Case Hardening', 'Nitriding', 'Grinding', 'Gear Hobbing', 'EDM/Wire Cutting',
+                'Broaching', 'Powder Coating', 'Painting', 'Blackening', 'Phosphating',
+                'Chrome & Zinc Plating',
+            ].map((process, idx) => (
+                <Grid item xs={12} sm={6} md={3} key={idx}> 
+                <Paper
+                    elevation={1}
+                    sx={{
+                    p: 4,
+                    borderRadius: 3,
+                    border: '1px solid #e0e0e0',
+                    textAlign: 'center',
+                    height: '100%', 
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: '#fff',
+                    transition: 'all 0.3s ease',
+                    cursor: 'default',
+                    '&:hover': {
+                        transform: 'translateY(-8px)',
+                        boxShadow: '0 12px 25px rgba(0,0,0,0.1)',
+                        borderColor: 'primary.main',
+                        backgroundColor: '#e3f2fd', 
+                    },
+                    }}
+                    data-aos="zoom-in"
+                    data-aos-delay={idx * 50}
+                >
+                    <Typography variant="h6" fontWeight={700} color="#455a64" sx={{ '&:hover': { color: 'primary.main' }, fontSize: '1.25rem' }}>
+                    {process}
+                    </Typography>
+                </Paper>
+                </Grid>
+            ))}
+            </Grid>
+        </Container>
+      </Box>
+
+      {/* ================= CUSTOMERS SECTION ================= */}
+      <Box sx={{ py: 10, backgroundColor: '#ffffff' }}>
+        <Container>
+            <Typography variant="h3" fontWeight={800} color="text.primary" textAlign="center" gutterBottom data-aos="fade-down">
+                Our Customers
+            </Typography>
+            <Divider sx={{ mb: 8, mx: 'auto', width: 100, height: 5, backgroundColor: 'secondary.main', borderRadius: 2 }} />
+            
+            <Grid container spacing={8} justifyContent="center" alignItems="center">
+                {customers.map((c, i) => (
+                <Grid item key={i} data-aos="fade-up" data-aos-delay={i * 100}>
+                    <Box
+                    component="img"
+                    src={c.image}
+                    alt={`Customer ${i}`}
+                    sx={{
+                        width: 160,
+                        height: 80,
+                        objectFit: 'contain',
+                        filter: 'grayscale(100%) opacity(0.7)',
+                        transition: 'all 0.4s ease',
+                        cursor: 'pointer',
+                        '&:hover': { 
+                            filter: 'grayscale(0%) opacity(1)',
+                            transform: 'scale(1.15)' 
+                        },
+                    }}
+                    />
+                </Grid>
+                ))}
+            </Grid>
+        </Container>
+      </Box>
+
+      {/* ================= WHATSAPP BUTTON ================= */}
       <Box
-        key={index}
+        component="a"
+        href="https://wa.me/9655821758?text=Hello!%20I'm%20interested%20in%20your%20services."
+        target="_blank"
+        rel="noopener noreferrer"
         sx={{
-          position: 'relative',
-          height: { xs: 300, md: 400 },
-          backgroundImage: `url('/image/hero${index + 1}.jpg')`, // Optional: add custom hero background images
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          position: 'fixed',
+          bottom: 30,
+          right: 30,
+          zIndex: 1000,
+          backgroundColor: '#25D366',
+          color: 'white',
+          borderRadius: '50%',
+          width: 70, 
+          height: 70,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
+          textDecoration: 'none',
+          transition: 'transform 0.3s',
+          '&:hover': { transform: 'scale(1.15)', boxShadow: '0 6px 20px rgba(0,0,0,0.4)' },
         }}
       >
-        {/* Dark overlay */}
-        <Box
-          sx={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            zIndex: 1,
-          }}
-        />
-        <Container sx={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-          <Typography
-            variant="h4"
-            fontWeight={700}
-            color="white"
-            sx={{ mb: 2 }}
-          >
-            We{' '}
-            <Box component="span" sx={{ color: '#f06292' }}>
-              {slide.highlight}
-            </Box>{' '}
-            {slide.title.split(' ').slice(2).join(' ')}
-          </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: 2,
-              flexWrap: 'wrap',
-              mt: 2,
-            }}
-          >
-            <Button
-              component={Link}
-              to="/about"
-              variant="contained"
-              color="secondary"
-              sx={{ borderRadius: 5, px: 3 }}
-            >
-              Our Company
-            </Button>
-            <Button
-              component={Link}
-              to="/ContactUs"
-              variant="outlined"
-              color="secondary"
-              sx={{ borderRadius: 5, px: 3, color: 'white', borderColor: 'white' }}
-            >
-              Contact Us
-            </Button>
-          </Box>
-        </Container>
-      </Box>
-    ))}
-  </Carousel>
-</Box>
-
-      {/* Vision & Mission Section */}
-      <Box sx={{ py: 10, px: { xs: 2, md: 8 } }}>
-        {visionMissionData.map((item, idx) => {
-          const isEven = idx % 2 === 1;
-          return (
-            <Grid
-              container
-              spacing={4}
-              direction={{ xs: 'column', md: isEven ? 'row-reverse' : 'row' }}
-              alignItems="center"
-              justifyContent="center"
-              data-aos={isEven ? 'fade-left' : 'fade-right'}
-              data-aos-delay={idx * 150}
-              sx={{ mb: 10 }}
-              key={idx}
-            >
-              <Grid item xs={12} md={6}>
-                <Paper elevation={3} sx={{ borderRadius: 3 }}>
-                  <Box
-                    component="img"
-                    src={item.img}
-                    alt={item.title}
-                    sx={{ width: '100%', height: 300, objectFit: 'cover', borderRadius: 3 }}
-                  />
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Typography variant="h5" fontWeight={600} gutterBottom>
-                  {item.title}
-                </Typography>
-                <Divider sx={{ mb: 2, width: 60 }} />
-                {item.details}
-              </Grid>
-            </Grid>
-          );
-        })}
+        <FaWhatsapp size={40} />
       </Box>
 
-      {/* Product Section */}
-    
-{/* 🟦 OUR PRODUCT SECTION */}
-<Box sx={{ px: 3, py: 6 }}>
-  <Typography
-    variant="h4"
-    fontWeight={900}
-    color="primary"
-    gutterBottom
-    textAlign="center"
-    data-aos="fade-down"
-  >
-    Our Product
-  </Typography>
-  <Divider
-    sx={{
-      mx: 'auto',
-      width: 80,
-      borderBottomWidth: 3,
-      borderColor: 'primary.main',
-      mb: 4,
-    }}
-  />
-
-  {/* ✅ Wrapper flexbox: grid on left, + button on right */}
-  <Box
-    sx={{
-      display: 'flex',
-      alignItems: 'flex-start',
-      justifyContent: 'center',
-      gap: 3,
-    }}
-  >
-    {/* Product Grid */}
-    <Box className="product-grid" sx={{ flex: '1 1 auto', maxWidth: '1150px' }}>
-      {product.slice(0, 4).map((prod, index) => (
-        <Box
-          key={index}
-          className="product-card"
-          data-aos="fade-up"
-          data-aos-delay={index * 100}
-        >
-          <div className="product-thumb">
-            <img src={prod.img} alt={prod.alt} className="product-image" />
-            <div className="overlay">
-              <Button
-                variant="contained"
-                color="secondary"
-                size="small"
-                className="view-button"
-              >
-                🔗
-              </Button>
-            </div>
-          </div>
-          <Typography variant="subtitle1" fontWeight={600} mt={1}>
-            {prod.alt}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {prod.desc}
-          </Typography>
-        </Box>
-      ))}
-    </Box>
-
-    {/* ✅ Floating “+” Button beside grid */}
-   <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-    <Button
-      component={Link}
-      to="/OurProduct"
-      variant="contained"
-      color="primary"
-      sx={{
-        width: 70,
-        height: 70,
-        borderRadius: '50%',
-        fontSize: '2rem',
-        boxShadow: '0 6px 12px rgba(0,0,0,0.2)',
-        '&:hover': {
-          transform: 'scale(1.1)',
-          boxShadow: '0 8px 16px rgba(0,0,0,0.3)',
-        },
-        transition: 'all 0.3s ease',
-      }}
-    >
-      +
-    </Button>
-  </Box>
-
-  </Box>
-</Box>
-
-        {/* Post Processes Section */}
-          <Box 
-          sx={{
-            py: 6,
-            px: { xs: 2, md: 8 },
-            background: '#ffffff',
-          }}
-        >
-       
-  <Typography
-    variant="h4"
-    fontWeight={700}
-    color="text.primary"
-    gutterBottom
-    data-aos="fade-down"
-  >
-    Post Processes & Machining
-  </Typography>
-  <Divider
-    sx={{
-      width: 100,
-      height: 4,
-      mx: 'auto',
-      backgroundColor: 'secondary.main',
-      borderRadius: 2,
-    }}
-  />
-
-
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{ mb: 4, fontSize: '1.1rem', maxWidth: 800, mx: 'auto' }}
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            We have well-defined out-sourcing processes with quality suppliers to deliver
-            the materials required by our customers. Various post machining processes we deal with are:
-          </Typography>
-
-          <Grid container spacing={3} justifyContent="center">
-            {[
-              'Heattreatment', 'Case hardening', 'Nitrating', 'Grinding', 'Gear hobbing', 'EDM/Wire Cutting',
-              'Broaching', 'Powder Coating', 'Painting', 'Blackening', 'Phosphating',
-              'Various types of plating chrome plating, zinc plating, etc.',
-            ].map((process, idx) => (
-              <Grid item xs={12} sm={6} md={4} key={idx}>
-                <Box
-                  sx={{
-                    p: 2,
-                    borderRadius: 3,
-                    backgroundColor: '#ffffff',
-                    boxShadow: 3,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1.5,
-                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                    '&:hover': {
-                      transform: 'translateY(-6px)',
-                      boxShadow: 6,
-                      backgroundColor: '#f1f8e9',
-                    },
-                  }}
-                  data-aos="zoom-in-up"
-                  data-aos-delay={100 + idx * 70}
-                >
-                  <span style={{ fontSize: '1.5rem', color: '#558b2f' }}>➤</span>
-                  <Typography variant="body1" fontWeight={600}>
-                    {process}
-                  </Typography>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-
-     
-         <a
-  href="https://wa.me/9655821758?text=Hello!%20I'm%20interested%20in%20your%20services."
-  target="_blank"
-  rel="noopener noreferrer"
-  style={{
-    position: 'fixed',
-    bottom: 20,
-    right: 20,
-    zIndex: 1000, // ✅ Ensure it's above everything
-    backgroundColor: '#25D366',
-    color: 'white',
-    borderRadius: '50%',
-    width: 60,
-    height: 60,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-    textDecoration: 'none',
-  }}
->
-  <FaWhatsapp size={30} />
-</a>
-<Box sx={{ py: 6, backgroundColor: '#ffffff', textAlign: 'center' }}>
-           <Typography variant="h4" fontWeight={600} color="text.primary" gutterBottom data-aos="fade-down">
-             Our Customers
-           </Typography>
-           <Divider sx={{ mx: 'auto', width: 100, borderBottomWidth: 3, borderColor: 'primary.main', mb: 4 }} />
-           <Box
-             className="customer-frame"
-             sx={{ display: 'flex', justifyContent: 'center', gap: 4, flexWrap: 'wrap' }}
-           >
-             {customers.map((customer, index) => (
-               <img
-                 key={index}
-                 src={customer.image}
-                 alt={`Customer ${index}`}
-                 style={{ width: 100, height: 'auto', objectFit: 'contain' }}
-               />
-             ))}
-           </Box>
-         </Box>  
-
-    
     </div>
   );
 };
