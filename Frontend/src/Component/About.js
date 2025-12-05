@@ -284,6 +284,7 @@
 // };
 
 // export default About;
+
 import React, { useState } from 'react';
 import {
   Container,
@@ -297,8 +298,7 @@ import {
   DialogContent,
   IconButton,
 } from '@mui/material';
-import { keyframes } from '@emotion/react';
-import styled from '@emotion/styled';
+import { styled, keyframes } from '@mui/material/styles'; 
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -325,8 +325,6 @@ const StyledCard = styled(Card)`
   border-top: 4px solid transparent;
   display: flex;
   flex-direction: column;
-  
-  /* 🟢 FIX: Ensures cards have minimum height for consistent look */
   min-height: 280px; 
 
   &:hover {
@@ -337,30 +335,31 @@ const StyledCard = styled(Card)`
 
 const HeaderBox = styled(Box)(({ theme }) => ({
   background: 'linear-gradient(135deg, #1976d2 0%, #0d47a1 100%)',
-  padding: '80px 24px 100px 24px', // Increased bottom padding for better overlap
+  padding: '80px 24px 100px 24px',
   textAlign: 'center',
   color: 'white',
-  marginBottom: '-60px', // Adjusted overlap
+  marginBottom: '-60px',
   borderBottomLeftRadius: '40px',
   borderBottomRightRadius: '40px',
 }));
 
+// === 🟢 FIX: PDF BOX (Using Flex to force width) ===
 const PDFIconBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   cursor: 'pointer',
-  padding: '15px 5px', // Reduced padding for mobile
+  padding: '15px 5px',
   borderRadius: '12px',
   backgroundColor: '#fafafa',
   border: '1px solid #eee',
   transition: 'all 0.3s ease',
   
-  /* 🟢 FIX: Responsive Width for "3 in one line" */
-  width: '140px', // Default for desktop
+  width: '140px', 
+  // This is where the error was happening. Now 'theme' is correctly defined.
   [theme.breakpoints.down('sm')]: {
-    width: '30%', // Fits 3 items in a row on mobile
+    width: '30%', 
     minWidth: '90px'
   },
 
@@ -378,7 +377,6 @@ const certificates = [
   { title: 'Udyam CERTIFICATE', file: '/image/Print _ Udyam.pdf' },
   { title: 'ISO CERTIFICATE', file: '/image/ISO CERTIFICATE.pdf' },
 ];
-
 // === Component ===
 const About = () => {
   const [open, setOpen] = useState(false);
@@ -395,7 +393,7 @@ const About = () => {
   };
 
   return (
-    <MainContainer sx={{ pt: { xs: 8, md: 0 } }}> {/* 🟢 FIX: Added top padding for Mobile to avoid Navbar overlap */}
+    <MainContainer sx={{ pt: { xs: 12, md: 0 } }}> 
       
       {/* Header */}
       <HeaderBox>
@@ -418,9 +416,9 @@ const About = () => {
       <Container maxWidth="lg" sx={{ mt: 0 }}>
         <Grid container spacing={4}>
           
-          {/* Company Profile (Full Width) */}
+          {/* Company Profile */}
           <Grid item xs={12}>
-            <StyledCard sx={{ borderTopColor: '#1976d2', minHeight: 'auto' }}> {/* Auto height for profile */}
+            <StyledCard sx={{ borderTopColor: '#1976d2', minHeight: 'auto' }}>
               <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                 <Typography variant="h5" fontWeight={700} gutterBottom color="#1976d2">
                   Company Profile
@@ -444,25 +442,38 @@ const About = () => {
               <Box sx={{ width: 60, height: 4, bgcolor: '#d32f2f', mx: 'auto', mt: 1, borderRadius: 2 }} />
             </Box>
             
-            {/* 🟢 FIX: Flex container to keep 3 items in one line */}
-            <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'nowrap', justifyContent: 'center' }}>
+            {/* 🟢 REVERTED TO FLEXBOX FOR PERFECT ALIGNMENT */}
+            <Box sx={{ 
+              display: 'flex', 
+              flexDirection: 'row', // Ensure row direction
+              justifyContent: 'space-between', // Spread them out properly
+              alignItems: 'stretch', // Make heights equal
+              gap: 2, // Space between items
+              width: '100%',
+              maxWidth: { xs: '100%', md: '600px' },
+              mx: 'auto'
+            }}>
               {certificates.map((cert) => (
                 <PDFIconBox key={cert.title} onClick={() => handleOpen(cert)}>
-                  <PictureAsPdfIcon sx={{ fontSize: { xs: 32, md: 48 }, color: '#d32f2f', mb: 1 }} />
+                  <PictureAsPdfIcon sx={{ fontSize: { xs: 32, md: 48 }, color: '#d32f2f', mb: { xs: 0.5, md: 1 } }} />
                   <Typography 
                     variant="caption" 
                     fontWeight={700} 
                     color="#555" 
-                    sx={{ textTransform: 'uppercase', fontSize: { xs: '0.65rem', md: '0.75rem' }, textAlign: 'center' }}
+                    sx={{ 
+                      textTransform: 'uppercase', 
+                      fontSize: { xs: '0.75rem', md: '0.75rem' }, 
+                      textAlign: 'center',
+                    }}
                   >
-                    {cert.title.replace(' CERTIFICATE', '')}
+                    {cert.title}
                   </Typography>
                 </PDFIconBox>
               ))}
             </Box>
           </Grid>
 
-          {/* Vision & Mission (Side by Side) */}
+          {/* Vision & Mission */}
           <Grid item xs={12} md={6}>
             <StyledCard sx={{ borderTopColor: '#00695c' }}>
               <CardContent sx={{ p: 4 }}>
@@ -493,10 +504,10 @@ const About = () => {
             </StyledCard>
           </Grid>
 
-          {/* Strengths & Capabilities */}
+          {/* Core Strengths - Mobile Full Width */}
           <Grid item xs={12} md={6}>
             <StyledCard sx={{ borderTopColor: '#0288d1' }}>
-              <CardContent sx={{ p: 4, flexGrow: 1 }}>
+              <CardContent sx={{ p: 4 }}>
                 <Typography variant="h5" fontWeight={700} gutterBottom color="#0288d1">
                   Core Strengths
                 </Typography>
@@ -504,16 +515,16 @@ const About = () => {
                   ✓ On-time Delivery<br />
                   ✓ High Product Quality<br />
                   ✓ Advanced Technology<br />
-                  ✓ Expert Workforce<br />
-                  ✓ Customer-Centric Approach {/* 🟢 FIX: Added point to extend height naturally */}
+                  ✓ Expert Workforce
                 </Typography>
               </CardContent>
             </StyledCard>
           </Grid>
 
+          {/* Capabilities - Mobile Full Width */}
           <Grid item xs={12} md={6}>
             <StyledCard sx={{ borderTopColor: '#2e7d32' }}>
-              <CardContent sx={{ p: 4, flexGrow: 1 }}>
+              <CardContent sx={{ p: 4 }}>
                 <Typography variant="h5" fontWeight={700} gutterBottom color="#2e7d32">
                   Capabilities
                 </Typography>
@@ -529,7 +540,7 @@ const About = () => {
 
           {/* Infrastructure */}
           <Grid item xs={12}>
-            <StyledCard sx={{ borderTopColor: '#7b1fa2', minHeight: 'auto' }}>
+            <StyledCard sx={{ borderTopColor: '#7b1fa2' }}>
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h5" fontWeight={700} gutterBottom color="#7b1fa2">
                   Infrastructure
@@ -562,7 +573,7 @@ const About = () => {
       >
         <DialogTitle sx={{ m: 0, p: 2, bgcolor: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Typography variant="h6" fontWeight="bold" color="primary">
-            {selectedPDF?.title}
+            {selectedPDF?.title} Certificate
           </Typography>
           <IconButton
             aria-label="close"
