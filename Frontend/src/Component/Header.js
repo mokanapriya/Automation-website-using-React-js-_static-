@@ -96,8 +96,21 @@ const Header = () => {
   const closeMobileMenu = () => setMobileMenuOpen(false);
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
-  const toggleFacilities = () => setFacilitiesOpen(prev => !prev);
-  const toggleServices = () => setServiceOpen(prev => !prev);
+  const toggleFacilities = () => {
+    setFacilitiesOpen(prev => !prev);
+    // Close services dropdown when opening facilities
+    if (!facilitiesOpen) {
+      setServiceOpen(false);
+    }
+  };
+  
+  const toggleServices = () => {
+    setServiceOpen(prev => !prev);
+    // Close facilities dropdown when opening services
+    if (!serviceOpen) {
+      setFacilitiesOpen(false);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,23 +122,34 @@ const Header = () => {
   }, []);
 
   const handleLinkClick = () => {
-    closeMobileMenu();
     setFacilitiesOpen(false);
     setServiceOpen(false);
+    closeMobileMenu();
   }
+  
+  // Close dropdowns when mobile menu closes
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      setFacilitiesOpen(false);
+      setServiceOpen(false);
+    }
+  }, [mobileMenuOpen]);
 
   return (
     <header className={`header ${shrink ? 'shrink' : ''}`}>
       <div className="container header-container">
         
-        {/* --- CHANGE START: Hamburger Icon 1st (For Mobile) --- */}
-        {/* இதை Logo-க்கு மேலே போடவும் */}
-        <div className="menu-icon" onClick={toggleMobileMenu}>
+        {/* Hamburger Menu Icon (Mobile) */}
+        <button 
+          className="menu-icon" 
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+          type="button"
+        >
           <span className={mobileMenuOpen ? "bar open" : "bar"}></span>
           <span className={mobileMenuOpen ? "bar open" : "bar"}></span>
           <span className={mobileMenuOpen ? "bar open" : "bar"}></span>
-        </div>
-        {/* --- CHANGE END --- */}
+        </button>
 
         {/* LOGO AREA - Visible on both Desktop and Mobile Header */}
         <Link to="/" className="logo-container" onClick={handleLinkClick}>
@@ -148,7 +172,14 @@ const Header = () => {
           
           {/* Sidebar Close Button */}
           <div className="sidebar-header">
-             <span className="close-btn" onClick={closeMobileMenu}>&times;</span>
+             <button 
+               className="close-btn" 
+               onClick={closeMobileMenu}
+               aria-label="Close menu"
+               type="button"
+             >
+               &times;
+             </button>
           </div>
 
           <ul className="navbar-links">
@@ -164,16 +195,46 @@ const Header = () => {
               className={`dropdown-parent ${facilitiesOpen ? 'expanded' : ''}`}
               onMouseEnter={() => window.innerWidth > 768 && setFacilitiesOpen(true)}
               onMouseLeave={() => window.innerWidth > 768 && setFacilitiesOpen(false)}
-              onClick={toggleFacilities}
             >
-              <div className="dropdown-toggle-row">
+              <div 
+                className="dropdown-toggle-row"
+                onClick={(e) => {
+                  if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleFacilities();
+                  }
+                }}
+              >
                 <span>Facilities</span>
                 <span className="arrow">▼</span>
               </div>
               
               <ul className={`dropdown-menu ${facilitiesOpen ? 'show' : ''}`}>
-                <li><Link to="/Infrastructure" className="dropdown-item" onClick={handleLinkClick}>Infrastructure</Link></li>
-                <li><Link to="/MachineryDetails" className="dropdown-item" onClick={handleLinkClick}>Machinery Details</Link></li>
+                <li>
+                  <Link 
+                    to="/Infrastructure" 
+                    className="dropdown-item" 
+                    onClick={(e) => {
+                      setFacilitiesOpen(false);
+                      handleLinkClick();
+                    }}
+                  >
+                    Infrastructure
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/MachineryDetails" 
+                    className="dropdown-item" 
+                    onClick={(e) => {
+                      setFacilitiesOpen(false);
+                      handleLinkClick();
+                    }}
+                  >
+                    Machinery Details
+                  </Link>
+                </li>
               </ul>
             </li>
 
@@ -182,16 +243,46 @@ const Header = () => {
               className={`dropdown-parent ${serviceOpen ? 'expanded' : ''}`}
               onMouseEnter={() => window.innerWidth > 768 && setServiceOpen(true)}
               onMouseLeave={() => window.innerWidth > 768 && setServiceOpen(false)}
-              onClick={toggleServices}
             >
-              <div className="dropdown-toggle-row">
+              <div 
+                className="dropdown-toggle-row"
+                onClick={(e) => {
+                  if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleServices();
+                  }
+                }}
+              >
                 <span>Services & Quality</span>
                 <span className="arrow">▼</span>
               </div>
               
               <ul className={`dropdown-menu ${serviceOpen ? 'show' : ''}`}>
-                <li><Link to="/Ourservice" className="dropdown-item" onClick={handleLinkClick}>Our Services</Link></li>
-                <li><Link to="/QualityPolicy" className="dropdown-item" onClick={handleLinkClick}>Quality & Policy</Link></li>
+                <li>
+                  <Link 
+                    to="/Ourservice" 
+                    className="dropdown-item" 
+                    onClick={(e) => {
+                      setServiceOpen(false);
+                      handleLinkClick();
+                    }}
+                  >
+                    Our Services
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/QualityPolicy" 
+                    className="dropdown-item" 
+                    onClick={(e) => {
+                      setServiceOpen(false);
+                      handleLinkClick();
+                    }}
+                  >
+                    Quality & Policy
+                  </Link>
+                </li>
               </ul>
             </li>
 

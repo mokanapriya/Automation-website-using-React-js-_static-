@@ -73,9 +73,10 @@ const QualityPolicy = () => {
   return (
     <Box
       sx={{
-        py: { xs: 8, md: 12 },
+        pt: { xs: 12, md: 10 },
+        pb: { xs: 6, md: 12 },
         px: { xs: 2, md: 4 },
-        backgroundColor: '#fff', // White background
+        backgroundColor: '#fff',
         minHeight: '100vh',
       }}
     >
@@ -91,6 +92,7 @@ const QualityPolicy = () => {
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             letterSpacing: '0.04em',
+            fontSize: { xs: '2rem', md: '3rem' },
           }}
         >
           Quality Policy
@@ -103,10 +105,11 @@ const QualityPolicy = () => {
           sx={{
             maxWidth: 720,
             mx: 'auto',
-            mb: 8,
+            mb: { xs: 4, md: 8 },
             fontWeight: 400,
             letterSpacing: '0.02em',
             lineHeight: 1.6,
+            fontSize: { xs: '1rem', md: '1.25rem' },
           }}
         >
           Our company is committed to maintaining the highest quality standards

@@ -267,6 +267,11 @@ const MainSection = styled(Box)`
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+  
+  @media (max-width: 768px) {
+    padding-top: 100px;
+    padding-bottom: 40px;
+  }
 `;
 
 const ServiceCard = styled(Card)`
@@ -413,8 +418,8 @@ const OurService = () => {
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 4,
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(auto-fit, minmax(280px, 1fr))' },
+            gap: { xs: 3, md: 4 },
           }}
         >
           {featureCards.map((card, index) => (

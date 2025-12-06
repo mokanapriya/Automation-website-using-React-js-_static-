@@ -203,15 +203,15 @@ const Machinery = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#ffffff',  // White background
+        backgroundColor: '#ffffff',
         minHeight: '100vh',
-        py: 8,
+        pt: { xs: 12, md: 10 },
+        pb: { xs: 6, md: 8 },
+        px: { xs: 2, md: 4 },
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Removed the soft wave background */}
-
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Typography
           variant="h3"
@@ -222,6 +222,7 @@ const Machinery = () => {
             color: '#334e68',
             mb: 4,
             fontFamily: '"Poppins", sans-serif',
+            fontSize: { xs: '2rem', md: '3rem' },
           }}
         >
           Machinery Details
@@ -244,33 +245,33 @@ const Machinery = () => {
             <Grid
               container
               key={idx}
-              spacing={4}
-              flexDirection={isEven ? 'row-reverse' : 'row'}
+              spacing={{ xs: 3, md: 4 }}
+              direction={{ xs: 'column', md: isEven ? 'row-reverse' : 'row' }}
               alignItems="center"
               data-aos={isEven ? 'fade-left' : 'fade-right'}
               data-aos-delay={idx * 150}
-              sx={{ mb: 8 }}
+              sx={{ mb: { xs: 4, md: 8 } }}
             >
               <Grid item xs={12} md={6}>
-               <Paper
-  elevation={3}
-  sx={{
-    borderRadius: 3,
-    overflow: 'hidden',
-    transition: 'transform 0.3s ease',
-    '&:hover': {
-      transform: 'scale(1.03)',
-      boxShadow: '0 10px 20px rgba(0,0,0,0.15)',
-    },
-  }}
->
+                <Paper
+                  elevation={3}
+                  sx={{
+                    borderRadius: 3,
+                    overflow: 'hidden',
+                    transition: 'transform 0.3s ease',
+                    '&:hover': {
+                      transform: 'scale(1.03)',
+                      boxShadow: '0 10px 20px rgba(0,0,0,0.15)',
+                    },
+                  }}
+                >
                   <Box
                     component="img"
                     src={machine.img}
                     alt={machine.title}
                     sx={{
                       width: '100%',
-                      height: 300,
+                      height: { xs: 250, md: 300 },
                       objectFit: 'cover',
                     }}
                   />
@@ -283,6 +284,7 @@ const Machinery = () => {
                   fontWeight="600"
                   color="#334e68"
                   gutterBottom
+                  sx={{ fontSize: { xs: '1.25rem', md: '1.5rem' } }}
                 >
                   {machine.title}
                 </Typography>
@@ -298,7 +300,10 @@ const Machinery = () => {
                 <Typography
                   variant="body1"
                   color="#627d98"
-                  sx={{ fontSize: '1.1rem', lineHeight: 1.6 }}
+                  sx={{ 
+                    fontSize: { xs: '0.95rem', md: '1.1rem' }, 
+                    lineHeight: 1.6 
+                  }}
                 >
                   {machine.details}
                 </Typography>

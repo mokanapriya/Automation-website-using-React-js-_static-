@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Box, Container, Typography, Divider } from '@mui/material';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import '../App.css';
@@ -89,95 +90,109 @@ const OurProduct = () => {
   return (
     <>
       {/* Main white background container */}
-      <div
-        style={{
+      <Box
+        sx={{
           backgroundColor: '#ffffff',
-          padding: '4rem 2rem',
+          pt: { xs: 12, md: 10 },
+          pb: { xs: 4, md: 6 },
+          px: { xs: 2, md: 4 },
           position: 'relative',
           zIndex: 1,
+          minHeight: '100vh',
         }}
       >
-        {/* Products Grid */}
-        {/* <div className="product-grid" style={{ position: 'relative', zIndex: 1 }}>
-          {projects.map((project, i) => (
-            <div
-              key={i}
-              className="product-card"
-              onClick={() => setIndex(i)}
-              style={{ cursor: 'pointer' }}
-              data-aos="zoom-in-up"
-            >
-              <div className="product-thumb">
-                <img src={project.img} alt={project.alt} className="product-image" />
-                <div className="overlay">
-                  <a href={project.img} className="icon-link" title="View Product" onClick={(e) => e.preventDefault()}>
-                    🔗
-                  </a>
+        <Container maxWidth="lg">
+          <Typography
+            variant="h3"
+            fontWeight={800}
+            textAlign="center"
+            gutterBottom
+            sx={{
+              mb: 2,
+              fontSize: { xs: '2rem', md: '3rem' },
+              color: '#003366',
+            }}
+          >
+            Our Products
+          </Typography>
+          <Divider
+            sx={{
+              mx: 'auto',
+              width: 100,
+              borderBottomWidth: 4,
+              borderColor: '#d81b60',
+              mb: 4,
+              borderRadius: 2,
+            }}
+          />
+
+          <div className="product-grid" style={{ position: 'relative', zIndex: 1 }}>
+            {projects.map((project, i) => (
+              <div
+                key={i}
+                className="product-card"
+                onClick={() => setIndex(i)}
+                style={{ cursor: 'pointer' }}
+                data-aos="zoom-in-up"
+              >
+                <div className="product-thumb">
+                  <img
+                    src={project.img}
+                    alt={project.alt}
+                    className="product-image"
+                  />
+                  <div className="overlay">
+                    <a
+                      href={project.img}
+                      className="icon-link"
+                      title="View Product"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      🔗
+                    </a>
+                  </div>
+                </div>
+
+                <div className="product-info">
+                  <h3 className="product-title">{project.alt}</h3>
+                  {project.desc && <p>{project.desc}</p>}
                 </div>
               </div>
-              <div className="product-title">{project.alt}</div>
-            </div>
-          ))}
-        </div> */}
-        <div className="product-grid" style={{ position: 'relative', zIndex: 1 }}>
-  {projects.map((project, i) => (
-    <div
-      key={i}
-      className="product-card"
-      onClick={() => setIndex(i)}
-      style={{ cursor: 'pointer' }}
-      data-aos="zoom-in-up"
-    >
-      <div className="product-thumb">
-        <img
-          src={project.img}
-          alt={project.alt}
-          className="product-image"
-        />
-        <div className="overlay">
-          <a
-            href={project.img}
-            className="icon-link"
-            title="View Product"
-            onClick={(e) => e.preventDefault()}
-          >
-            🔗
-          </a>
-        </div>
-      </div>
-
-      {/* ✅ Wrap text inside .product-info for consistent spacing */}
-      <div className="product-info">
-        <h3 className="product-title">{project.alt}</h3>
-        {/* Optional: If you have short descriptions, include this */}
-        {project.desc && <p>{project.desc}</p>}
-      </div>
-    </div>
-  ))}
-</div>
-
-      </div>
+            ))}
+          </div>
+        </Container>
+      </Box>
 
       {/* Lightbox Preview */}
-      {index >= 0 && (
-        <Lightbox
-          open={index >= 0}
-          index={index}
-          close={() => setIndex(-1)}
-          slides={projects.map((p) => ({ src: p.img }))}
-          render={{
-            slide: () => (
-              <div className="lightbox-custom-slide" data-aos="fade-up">
-                <img src={projects[index].img} alt={projects[index].alt} />
+      <Lightbox
+        open={index >= 0}
+        index={index}
+        close={() => setIndex(-1)}
+        slides={projects.map((p) => ({ 
+          src: p.img,
+          alt: p.alt,
+          description: p.description,
+          title: p.alt
+        }))}
+        on={{
+          view: ({ index: currentIndex }) => {
+            setIndex(currentIndex);
+          },
+        }}
+        render={{
+          slide: ({ slide }) => {
+            return (
+              <div className="lightbox-custom-slide">
+                <img src={slide.src} alt={slide.alt} />
                 <div className="lightbox-caption">
-                  <h3>{projects[index].alt}</h3>
-                  <p>{projects[index].description}</p>
+                  <h3>{slide.title}</h3>
+                  <p>{slide.description}</p>
                 </div>
               </div>
-            ),
-          }}
-        />
-      )}
+            );
+          },
+        }}
+      />
     </>
   );
 };
